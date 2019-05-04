@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+	integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+	crossorigin=""/>
+	
+	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+	integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+	crossorigin=""></script>
+	
+	<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+       width:500px;height:500px;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    
+	<div id="map"></div>
+    <script>
+      
+	  var beirut = [33.894193, 35.497937];
+	  var mymap = L.map('map').setView(beirut, 13);
+
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		  minZoom: 1,
+		  maxZoom: 18,
+		  attribution: 'Map data &copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(mymap);
+		
+		var marker = L.marker(beirut).addTo(mymap);
+		marker.bindPopup("<b>John Hanna</b><br>Lives Here");
+    
+    var aublocation = [33.901464, 35.481493];
+    var aubmarker = L.marker(aublocation).addTo(mymap);
+   
+    aubmarker.bindPopup("<b>aub</b><br>is here");
+    
+		
+    </script>
+    
+  </body>
+</html>
