@@ -1,10 +1,11 @@
-<code>
 <!DOCTYPE html>
 <html>
   <head>
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
 	integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -18,7 +19,7 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-       width:500px;height:500px;
+        height: 100%;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -33,8 +34,8 @@
 	<div id="map"></div>
     <script>
       
-	  var beirut = [33.894193, 35.497937];
-	  var mymap = L.map('map').setView(beirut, 13);
+	  var beirut = [33.8861, 35.5046];
+	  var mymap = L.map('map').setView(beirut, 15);
 
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		  minZoom: 1,
@@ -42,17 +43,71 @@
 		  attribution: 'Map data &copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(mymap);
 		
-		var marker = L.marker(beirut).addTo(mymap);
-		marker.bindPopup("<b>John Hanna</b><br>Lives Here");
-    
-    var aublocation = [33.901464, 35.481493];
-    var aubmarker = L.marker(aublocation).addTo(mymap);
-   
-    aubmarker.bindPopup("<b>aub</b><br>is here");
-    
 		
+		 var burjj = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            35.496670603752136,
+            33.89535919120454
+          ],
+          [
+            35.49642115831375,
+            33.89534583287791
+          ],
+          [
+            35.49643725156784,
+            33.89518330640295
+          ],
+          [
+            35.49668401479721,
+            33.89519889114687
+          ],
+          [
+            35.496686697006226,
+            33.8953569648169
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.495565533638,
+          33.895452699432354
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.49660086631775,
+          33.89560854625089
+        ]
+      }
+    }
+  ]
+}
+		
+		 L.geoJSON(burjj).addTo(mymap);
+		
+	var burjloc = [33.89535919120454, 35.496670603752136];
+    var burjmarker = L.marker(burjloc).addTo(mymap);
+   
+    burjmarker.bindPopup("<b>aub</b><br>is here");
     </script>
     
   </body>
 </html>
-</code>
