@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+	integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+	crossorigin=""/>
+	
+	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+	integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+	crossorigin=""></script>
+	
+	<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    
+	<div id="map"></div>
+    <script>
+      
+	  var cairo = [30.092727, 31.323609];
+	  var mymap = L.map('map').setView(cairo, 15);
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		  minZoom: 1,
+		  maxZoom: 18,
+		  attribution: 'Map data &copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(mymap);
+		
+		
+		 var parks = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {"popupContent": "This marker is for AUB"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.320819854736328,
+              30.10084346201321
+            ],
+            [
+              31.315219402313232,
+              30.09646226632216
+            ],
+            [
+              31.31646394729614,
+              30.095088461581106
+            ],
+            [
+              31.322472095489502,
+              30.099358332688045
+            ],
+            [
+              31.320819854736328,
+              30.10084346201321
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"popupContent": "This marker is for cc"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.330599188804626,
+              30.093496495046104
+            ],
+            [
+              31.331586241722107,
+              30.092763160729632
+            ],
+            [
+              31.332117319107052,
+              30.093310841302966
+            ],
+            [
+              31.33114099502563,
+              30.09403024761559
+            ],
+            [
+              31.330599188804626,
+              30.093496495046104
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"popupContent": "This marker is for dd"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.32527232170105,
+              30.09318088347536
+            ],
+            [
+              31.325519084930416,
+              30.09288383637078
+            ],
+            [
+              31.326608061790463,
+              30.09347328834726
+            ],
+            [
+              31.326388120651245,
+              30.093737844390937
+            ],
+            [
+              31.32579803466797,
+              30.09349185370675
+            ],
+            [
+              31.32527232170105,
+              30.09318088347536
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"popupContent": "This marker is for ee"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.32578730583191,
+              30.094684670746524
+            ],
+            [
+              31.32528305053711,
+              30.094331932575844
+            ],
+            [
+              31.325181126594543,
+              30.094508301818507
+            ],
+            [
+              31.32447302341461,
+              30.094109149924858
+            ],
+            [
+              31.324773430824276,
+              30.093733203062936
+            ],
+            [
+              31.325991153717037,
+              30.094466530184203
+            ],
+            [
+              31.32578730583191,
+              30.094684670746524
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
+		
+		 L.geoJSON(parks).addTo(mymap);
+		
+		var geojson = $.ajax({
+          url:"shapesWithPopupInfo.geojson",
+          dataType: "json",
+          success: console.log("geojson data successfully loaded."),
+          error: function (xhr) {
+            console.log(xhr.statusText)
+          }
+        });
+        
+	$.when(geojson).done(function() {
+            L.geoJSON(geojson.responseJSON, {
+				onEachFeature: onEachFeature
+			}).addTo(mymap);
+        });
+		
+		
+		function onEachFeature(feature, layer)
+		{
+			if (feature.properties && feature.properties.popupContent)
+			{
+				layer.bindPopup(feature.properties.popupContent);
+			}
+		}
+		
+	
+    </script>
+    
+  </body>
+</html>
