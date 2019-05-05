@@ -187,20 +187,7 @@
 		
 		 L.geoJSON(parks).addTo(mymap);
 		
-		var geojson = $.ajax({
-          url:"shapesWithPopupInfo.geojson",
-          dataType: "json",
-          success: console.log("geojson data successfully loaded."),
-          error: function (xhr) {
-            console.log(xhr.statusText)
-          }
-        });
-        
-	$.when(geojson).done(function() {
-            L.geoJSON(geojson.responseJSON, {
-				onEachFeature: onEachFeature
-			}).addTo(mymap);
-        });
+		
 		
 		
 		function onEachFeature(feature, layer)
