@@ -185,10 +185,12 @@
   ]
 }
 		
-		 L.geoJSON(parks).addTo(mymap);
 		
 		
 		
+		 L.geoJSON(parks, {
+				onEachFeature: onEachFeature
+			}).addTo(mymap);
 		
 		function onEachFeature(feature, layer)
 		{
