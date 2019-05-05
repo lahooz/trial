@@ -48,6 +48,8 @@
   "features": [
     {
       "type": "Feature",
+	    “name”: “Beirut”, 
+“popupContent”: “This marker is for AUB”,
       "properties": {},
       "geometry": {
         "type": "Polygon",
@@ -187,6 +189,12 @@
 		
 		 L.geoJSON(parks).addTo(mymap);
 		
+	    function onEachFeature(feature, layer)
+{
+if (feature.properties && feature.properties.popupContent)
+{ layer.bindPopup(feature.properties.popupContent);
+}
+}
 	
     </script>
     
